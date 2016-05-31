@@ -1,4 +1,4 @@
-package com.berryjam.zookeepersample; /**
+package com.berryjam.zookeepersample.javaexample; /**
  * A simple class that monitors the data and existence of a ZooKeeper
  * node. It uses asynchronous ZooKeeper APIs.
  */
@@ -67,6 +67,7 @@ public class DataMonitor implements Watcher, StatCallback {
                     // server and any watches triggered while the client was
                     // disconnected will be delivered (in order of course)
                     break;
+                case Disconnected:
                 case Expired:
                     // It's all over
                     dead = true;

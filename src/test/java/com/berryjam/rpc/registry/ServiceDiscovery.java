@@ -57,14 +57,12 @@ public class ServiceDiscovery {
     private ZooKeeper connectServer() {
         ZooKeeper zk = null;
         try {
-            zk = new ZooKeeper(registryAddress, Constant.ZK_SESSION_TIMEOUT, new Watcher() {
-                @Override
-                public void process(WatchedEvent event) {
-                    if (event.getState() == Watcher.Event.KeeperState.SyncConnected) {
-                        latch.countDown();
-                    }
-                }
-            });
+            zk = new ZooKeeper(registryAddress, Constant.ZK_SESSION_TIMEOUT,
+                    (event) -> {
+                        if (event.getState() == Watcher.Event.KeeperState.SyncConnected) {
+                            latch.countDown();
+                        }
+                    });
             latch.await();
         } catch (IOException e) {
             LOGGER.error("", e);
@@ -78,12 +76,9 @@ public class ServiceDiscovery {
         try {
             List<String> nodeList = null;
             try {
-                nodeList = zk.getChildren(Constant.ZK_REGISTRY_PATH, new Watcher() {
-                    @Override
-                    public void process(WatchedEvent event) {
-                        if (event.getType() == Event.EventType.NodeChildrenChanged) {
-                            watchNode(zk);
-                        }
+                nodeList = zk.getChildren(Constant.ZK_REGISTRY_PATH, (event) -> {
+                    if (event.getType() == Watcher.Event.EventType.NodeChildrenChanged) {
+                        watchNode(zk);
                     }
                 });
             } catch (KeeperException e) {

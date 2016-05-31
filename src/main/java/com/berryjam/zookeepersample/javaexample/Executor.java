@@ -1,4 +1,4 @@
-package com.berryjam.zookeepersample; /**
+package com.berryjam.zookeepersample.javaexample; /**
  * A simple example program to use DataMonitor to start and
  * stop executables based on a znode. The program watches the
  * specified znode and saves the data that corresponds to the

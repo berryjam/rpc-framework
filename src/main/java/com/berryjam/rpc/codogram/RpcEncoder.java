@@ -1,6 +1,5 @@
 package com.berryjam.rpc.codogram;
 
-import com.berryjam.rpc.bo.RpcRequest;
 import com.berryjam.rpc.util.SerializationUtil;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
