@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.concurrent.CountDownLatch;
 
 /**
+ * 基于ZooKeeper实现的分布式锁
+ *
  * @author huangjinkun.
  * @date 16/5/31
  * @time 上午9:01
